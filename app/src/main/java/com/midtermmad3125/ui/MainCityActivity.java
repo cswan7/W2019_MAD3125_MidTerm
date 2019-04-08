@@ -10,6 +10,7 @@ import com.midtermmad3125.R;
 import com.midtermmad3125.utils.ReadJSONUtils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class MainCityActivity extends AppCompatActivity
 {
+    private static final String TAG = "MainCityActivity";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
@@ -34,14 +36,48 @@ public class MainCityActivity extends AppCompatActivity
     private void processJSON()
     {
         String jsonString = loadJSONFromAsset();
+        //Read city JSON Object
+        JSONObject mCity= mCity.getJSONObject("city");
+        String name=mCity.getString("name");
+        String country=mCity.getString("country");
+        String population=mCity.getString("population");
+        Log.d("JSON:",name+" , "+country+" , "+population);
+
+        //Read cnt JSON object
+        JSONObject mCnt = mCnt.getJSONObject();
+        String cnt = mCnt.getString("cnt");
+        Log.d("JSON:");
+
+
+        //Read coord JSON Object
+        JSONObject mCoord = mCoord.getJSONObject("coord");
+        String lon = mCoord.getString("lon");
+        String lat = mCoord.getString("lat");
+
+        Log.d(TAG, "JSON:", lon + " , " + lat);
         if(jsonString!=null){
             try{
-                JSONObject mJSONObject = new JSONObject();
-                JSONArray mJSONArray = mJSONObject.getJSONArray("list");
-                for (int i=0;i<mJSONArray.length();i++)
-                    
+                JSONArray mJSONArray=new JSONArray(jsonString);
+                JSONObject mList = new JSONObject("list");
+                for (int i=0;i<mList.length();i++)
+                {
+                   JSONObject mJSONObject = mJSONArray.getJSONObject(i);
+
+                   String dt = mJSONObject.getString("dt");
+                    Log.d("JSON:", dt);
+
+                   //Read temp JSON Object
+                    JSONObject mTemp = mJSONObject.getJSONObject("temp");
+                    String day = mTemp.getString("day");
+                    String
 
 
+                }
+
+
+
+            }catch (JSONException e){
+                e.printStackTrace();
             }
         }
     }
