@@ -9,7 +9,7 @@
     </style>
 
     <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@layout/splash_screen</item>
     </style>
 
 </resources>

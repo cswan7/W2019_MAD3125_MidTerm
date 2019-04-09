@@ -46,7 +46,7 @@ public class MainCityActivity extends AppCompatActivity
         //Read cnt JSON object
         JSONObject mCnt = mCnt.getJSONObject();
         String cnt = mCnt.getString("cnt");
-        Log.d("JSON:");
+        Log.d("JSON:",cnt);
 
 
         //Read coord JSON Object
@@ -59,7 +59,7 @@ public class MainCityActivity extends AppCompatActivity
             try{
                 JSONArray mJSONArray=new JSONArray(jsonString);
                 JSONObject mList = new JSONObject("list");
-                for (int i=0;i<mList.length();i++)
+                for (int i=0;i<cnt;i++)
                 {
                    JSONObject mJSONObject = mJSONArray.getJSONObject(i);
 
@@ -69,7 +69,8 @@ public class MainCityActivity extends AppCompatActivity
                    //Read temp JSON Object
                     JSONObject mTemp = mJSONObject.getJSONObject("temp");
                     String day = mTemp.getString("day");
-                    String
+                    String min = mTemp.getString("min");
+                    string
 
 
                 }
