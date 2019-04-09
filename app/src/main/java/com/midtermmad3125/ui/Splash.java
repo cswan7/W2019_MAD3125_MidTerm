@@ -24,5 +24,6 @@ public class Splash extends MainCityActivity {
                 finish();
             }
         }),3000;
+
     }
 }

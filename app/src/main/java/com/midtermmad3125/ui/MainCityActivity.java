@@ -43,11 +43,6 @@ public class MainCityActivity extends AppCompatActivity
         String population=mCity.getString("population");
         Log.d("JSON:",name+" , "+country+" , "+population);
 
-        //Read cnt JSON object
-        JSONObject mCnt = mCnt.getJSONObject();
-        String cnt = mCnt.getString("cnt");
-        Log.d("JSON:",cnt);
-
 
         //Read coord JSON Object
         JSONObject mCoord = mCoord.getJSONObject("coord");
@@ -55,28 +50,50 @@ public class MainCityActivity extends AppCompatActivity
         String lat = mCoord.getString("lat");
 
         Log.d(TAG, "JSON:", lon + " , " + lat);
+
+        //Read list JSON Object
         if(jsonString!=null){
             try{
                 JSONArray mJSONArray=new JSONArray(jsonString);
-                JSONObject mList = new JSONObject("list");
-                for (int i=0;i<cnt;i++)
+                JSONObject mJSONObject = new JSONObject("list");
+                for (int i=0;i<16;i++)
                 {
                    JSONObject mJSONObject = mJSONArray.getJSONObject(i);
 
                    String dt = mJSONObject.getString("dt");
-                    Log.d("JSON:", dt);
+                   String pressure = mJSONObject.getString("pressure");
+                   String humidity = mJSONObject.getString("humidity");
+                   String speed = mJSONObject.getString("speed");
+                   String deg= mJSONObject.getString("deg");
+                   String clouds=mJSONObject.getString("clouds");
+                   String rain=mJSONObject.getString("rain");
+                    Log.d("JSON:", dt, pressure, humidity, speed, deg, clouds, rain);
 
                    //Read temp JSON Object
                     JSONObject mTemp = mJSONObject.getJSONObject("temp");
                     String day = mTemp.getString("day");
                     String min = mTemp.getString("min");
-                    string
+                    String max = mTemp.getString("max");
+                    String night = mTemp.getString("night");
+                    String eve = mTemp.getString("eve");
+                    String morn = mTemp.getString("morn");
+                    Log.d("JSON:",day, min, max, night, eve, morn);
 
+                    //Read weather JSON Array
+                    JSONArray mWeather = new JSONArray(jsonString);
+                    JSONObject weather = new JSONObject("weather");
+                    for(int j=0; j<weather.length();j++)
+                    {
+                    JSONObject weather = mWeather.getJSONObject(j);
 
+                    String id = weather.getString("id");
+                    String main = weather.get("main");
+                    String description = weather.getString("description");
+                    String icon= weather.getString("icon");
+                        Log.d("JSON:",id,main,description,icon);
+
+                    }
                 }
-
-
-
             }catch (JSONException e){
                 e.printStackTrace();
             }
