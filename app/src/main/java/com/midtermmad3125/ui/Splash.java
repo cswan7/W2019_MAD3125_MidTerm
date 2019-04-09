@@ -9,7 +9,7 @@ import com.midtermmad3125.R;
 public class Splash extends MainCityActivity {
 
     Handler handler;
-
+     //https://abhiandroid.com/programming/splashscreen
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
