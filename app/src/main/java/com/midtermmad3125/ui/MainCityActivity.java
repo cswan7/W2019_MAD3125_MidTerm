@@ -24,7 +24,6 @@ public class MainCityActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
-    private List<ListItem> listItems;
     //hello
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,21 +34,32 @@ public class MainCityActivity extends AppCompatActivity
 
     private void processJSON()
     {
-        String jsonString = loadJSONFromAsset();
+            String jsonString = loadJSONFromAsset();
         //Read city JSON Object
-        JSONObject mCity= mCity.getJSONObject("city");
-        String name=mCity.getString("name");
-        String country=mCity.getString("country");
-        String population=mCity.getString("population");
-        Log.d("JSON:",name+" , "+country+" , "+population);
+        try {
+            JSONObject mCity = new JSONObject();
+            mCity = mCity.getJSONObject("city");
 
+            String name = mCity.getString("name");
+            String country = mCity.getString("country");
+            String population = mCity.getString("population");
+            Log.d("JSON:", name + " , " + country + " , " + population);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         //Read coord JSON Object
-        JSONObject mCoord = mCoord.getJSONObject("coord");
-        String lon = mCoord.getString("lon");
-        String lat = mCoord.getString("lat");
+        JSONObject mCoord= new JSONObject();
+        try {
+            mCoord = mCoord.getJSONObject("coord");
+            String lon = mCoord.getString("lon");
+            String lat = mCoord.getString("lat");
 
-        Log.d(TAG, "JSON:", lon + " , " + lat);
+            Log.d("JSON:", lon + " , " + lat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
         //Read list JSON Object
         if(jsonString!=null){
@@ -58,16 +68,16 @@ public class MainCityActivity extends AppCompatActivity
                 JSONObject mJSONObject = new JSONObject("list");
                 for (int i=0;i<16;i++)
                 {
-                   JSONObject mJSONObject = mJSONArray.getJSONObject(i);
+                   JSONObject mList = mJSONArray.getJSONObject(i);
 
-                   String dt = mJSONObject.getString("dt");
-                   String pressure = mJSONObject.getString("pressure");
-                   String humidity = mJSONObject.getString("humidity");
-                   String speed = mJSONObject.getString("speed");
-                   String deg= mJSONObject.getString("deg");
-                   String clouds=mJSONObject.getString("clouds");
-                   String rain=mJSONObject.getString("rain");
-                    Log.d("JSON:", dt, pressure, humidity, speed, deg, clouds, rain);
+                   String dt = mList.getString("dt");
+                   String pressure = mList.getString("pressure");
+                   String humidity = mList.getString("humidity");
+                   String speed = mList.getString("speed");
+                   String deg= mList.getString("deg");
+                   String clouds=mList.getString("clouds");
+                   String rain=mList.getString("rain");
+
 
                    //Read temp JSON Object
                     JSONObject mTemp = mJSONObject.getJSONObject("temp");
@@ -77,20 +87,20 @@ public class MainCityActivity extends AppCompatActivity
                     String night = mTemp.getString("night");
                     String eve = mTemp.getString("eve");
                     String morn = mTemp.getString("morn");
-                    Log.d("JSON:",day, min, max, night, eve, morn);
+
 
                     //Read weather JSON Array
                     JSONArray mWeather = new JSONArray(jsonString);
                     JSONObject weather = new JSONObject("weather");
                     for(int j=0; j<weather.length();j++)
                     {
-                    JSONObject weather = mWeather.getJSONObject(j);
+                    JSONObject myWeather = mWeather.getJSONObject(j);
 
-                    String id = weather.getString("id");
-                    String main = weather.get("main");
-                    String description = weather.getString("description");
-                    String icon= weather.getString("icon");
-                        Log.d("JSON:",id,main,description,icon);
+                    String id = myWeather.getString("id");
+                    String main = myWeather.getString("main");
+                    String description = myWeather.getString("description");
+                    String icon= myWeather.getString("icon");
+
 
                     }
                 }

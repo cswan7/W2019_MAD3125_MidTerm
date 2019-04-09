@@ -23,7 +23,7 @@ public class Splash extends MainCityActivity {
                 startActivity(intent);
                 finish();
             }
-        }),3000;
+        },3000);
 
     }
 }
